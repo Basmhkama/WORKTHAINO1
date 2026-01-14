@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ระบบแนะนำการท่องเที่ยวกรุงเทพฯ</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-header">
+                <svg class="nav-icon" width="32" height="32" viewBox="0 0 24 24" fill="none"
+                    stroke="currentColor" stroke-width="2">
+                    <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
+                    <circle cx="12" cy="10" r="3"></circle>
+                </svg>
+                <span class="nav-title">Bangkok Tour Guide</span>
+            </div>
+
+            <div class="nav-menu">
+                <button onclick="changePage('home')" class="nav-btn active" data-page="home">หน้าแรก</button>
+                <button onclick="changePage('places')" class="nav-btn" data-page="places">สถานที่ท่องเที่ยว</button>
+                <button onclick="changePage('calculator')" class="nav-btn" data-page="calculator">คำนวณค่าใช้จ่าย</button>
+                <button onclick="changePage('planner')" class="nav-btn" data-page="planner">วางแผนทริป</button>
+                <button onclick="changePage('summary')" class="nav-btn" data-page="summary">สรุปค่าใช้จ่าย</button>
+                <button onclick="changePage('contact')" class="nav-btn" data-page="contact">ติดต่อเรา</button>
+                <button onclick="changePage('help')" class="nav-btn" data-page="help">ช่วยเหลือ</button>
+
+                <!-- 🌙 Dark Mode Button -->
+                <button onclick="toggleDarkMode()" class="nav-btn" id="darkModeBtn">
+                    🌙 โหมดมืด
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Content -->
+    <div class="content-container">
+
+        <!-- Home -->
+        <div id="page-home" class="page active">
+            <div class="hero-section">
+                <h1 class="hero-title">ยินดีต้อนรับสู่ระบบแนะนำการท่องเที่ยวกรุงเทพฯ</h1>
+                <p class="hero-subtitle">วางแผนทริปท่องเที่ยวของคุณได้อย่างง่ายดาย</p>
+            </div>
+        </div>
+
+        <!-- Places -->
+        <div id="page-places" class="page">
+            <h2 class="page-title blue">สถานที่ท่องเที่ยวในกรุงเทพฯ</h2>
+            <div id="places-grid" class="places-grid"></div>
+
+            <div id="map-container">
+                <h3>📍 แผนที่สถานที่ท่องเที่ยว</h3>
+                <iframe id="google-map" width="100%" height="350" style="border:0;" loading="lazy"></iframe>
+            </div>
+        </div>
+
+        <!-- Calculator -->
+        <div id="page-calculator" class="page">
+            <h2 class="page-title green">คำนวณค่าใช้จ่าย</h2>
+            <div class="form-card">
+                <input type="number" id="budget" placeholder="งบประมาณทั้งหมด">
+                <input type="number" id="days" placeholder="จำนวนวัน">
+                <input type="number" id="transport" placeholder="ค่าเดินทาง">
+                <button onclick="calculateAndShowSummary()" class="btn btn-green">คำนวณ</button>
+            </div>
+        </div>
+
+        <!-- Summary -->
+        <div id="page-summary" class="page">
+            <h2 class="page-title orange">สรุปค่าใช้จ่าย</h2>
+            <div id="summary-content"></div>
+        </div>
+
+        <!-- Help -->
+        <div id="page-help" class="page">
+            <h2 class="page-title indigo">คำถามที่พบบ่อย</h2>
+            <div class="faq-card">
+                <h3>❓ ระบบนี้ฟรีหรือไม่</h3>
+                <p>ระบบนี้ให้บริการฟรี</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <p>© 2025 Bangkok Tour Guide</p>
+    </footer>
+
+    <script src="script.js"></script>
+
+    <!-- Dark Mode Script -->
+    <script>
+        function toggleDarkMode() {
+            document.body.classList.toggle('dark');
+
+            if (document.body.classList.contains('dark')) {
+                localStorage.setItem('theme', 'dark');
+                document.getElementById('darkModeBtn').innerText = '☀️ โหมดสว่าง';
+            } else {
+                localStorage.setItem('theme', 'light');
+                document.getElementById('darkModeBtn').innerText = '🌙 โหมดมืด';
+            }
+        }
+
+        // โหลดค่าที่บันทึกไว้
+        if (localStorage.getItem('theme') === 'dark') {
+            document.body.classList.add('dark');
+            document.getElementById('darkModeBtn').innerText = '☀️ โหมดสว่าง';
+        }
+    </script>
+</body>
+</html>
